@@ -1,0 +1,74 @@
+@slow
+
+Feature: Nmap robots attack
+
+Background:
+Given "nmap" is installed
+And the following profile:
+|name|value|
+|hostname1|quote.ds-csaa.io|
+|hostname2|csaa-insurance.aaa.com|
+|hostname3|e1.pncie.com|
+|hostname4|e2.pncie.com|
+|hostname5|e3.pncie.com|
+|hostname6|e4.pncie.com|
+
+Scenario: Detects robots.txt files on host.
+When I launch an "nmap" attack with:
+"""
+nmap --script http-robots.txt <hostname1>
+"""
+Then the output should contain:
+"""
+|http-robots.txt
+"""
+
+Scenario: Detects robots.txt files on host.
+When I launch an "nmap" attack with:
+"""
+nmap --script http-robots.txt <hostname2>
+"""
+Then the output should contain:
+"""
+|http-robots.txt
+"""
+
+Scenario: Detects robots.txt files on host.
+When I launch an "nmap" attack with:
+"""
+nmap --script http-robots.txt <hostname3>
+"""
+Then the output should contain:
+"""
+|http-robots.txt
+"""
+
+Scenario: Detects robots.txt files on host.
+When I launch an "nmap" attack with:
+"""
+nmap --script http-robots.txt <hostname4>
+"""
+Then the output should contain:
+"""
+|http-robots.txt
+"""
+
+Scenario: Detects robots.txt files on host.
+When I launch an "nmap" attack with:
+"""
+nmap --script http-robots.txt <hostname5>
+"""
+Then the output should contain:
+"""
+|http-robots.txt
+"""
+
+Scenario: Detects robots.txt files on host.
+When I launch an "nmap" attack with:
+"""
+nmap --script http-robots.txt <hostname6>
+"""
+Then the output should contain:
+"""
+|http-robots.txt
+"""
