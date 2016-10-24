@@ -1,4 +1,5 @@
-These group of security tests for:
+
+These are a group of security tests for:
 
 * Robots.txt
 * Standard security headers
@@ -13,4 +14,4 @@ These tests are meant to monitor environments for changes, not scan for security
 
 **Usage** 
 
-env HOSTNAME=*<hostname>* /opt/gauntlt/bin/gauntlt -t *<tag>*
+env HOSTNAME=*hostname* /opt/gauntlt/bin/gauntlt -t *tag*
