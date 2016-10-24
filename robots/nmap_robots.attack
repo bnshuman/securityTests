@@ -1,0 +1,49 @@
+@slow
+
+Feature: nmap attacks for scanme.nmap.org and to use this for your tests, change the value in the profile
+  Background:
+    Given "nmap" is installed
+    And the following profile:
+      | name       | value        |
+      | hostname1  | e0.pncie.com |
+      | hostname2  | e1.pncie.com |
+      | hostname3  | e3.pncie.com |
+      | hostname4  | csaa-insurance.aaa.com |
+      
+   Scenario: Detects robots.txt file on this host.
+    When I launch an "nmap" attack with:
+      """
+      nmap -p80,443 --script http-robots.txt <hostname1>
+      """
+    Then the output should contain:
+      """
+      | http-robots.txt:
+      """
+   Scenario: Detects robots.txt file on this host.
+    When I launch an "nmap" attack with:
+      """
+      nmap -p80,443 --script http-robots.txt <hostname2>
+      """
+    Then the output should contain:
+      """
+      | http-robots.txt:
+      """
+   Scenario: Detects robots.txt file on this host.
+    When I launch an "nmap" attack with:
+      """
+      nmap -p80,443 --script http-robots.txt <hostname3>
+      """
+    Then the output should contain:
+      """
+      | http-robots.txt:
+      """
+   Scenario: Detects robots.txt file on this host.
+    When I launch an "nmap" attack with:
+      """
+      nmap -p80,443 --script http-robots.txt <hostname4>
+      """
+    Then the output should not contain:
+      """
+      | http-robots.txt:
+      """
+
