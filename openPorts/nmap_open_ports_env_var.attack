@@ -3,68 +3,40 @@
 Feature: nmap attacks
   Background:
     Given "nmap" is installed
-    And the following profile:
-      | name       | value                   |
-      | hostname1  | e0.pncie.com            |
-      | hostname2  | e1.pncie.com            |
-      | hostname3  | e3.pncie.com            |
-      | hostname4  | csaa-insurance.aaa.com  |
+    And the following environment variables:
+      | name       | environment_variable_name |
+      | hostname  | HOSTNAME |
 
-   Scenario: Verify expected open ports in development environment using the nmap fast flag
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname1>
-      """
-    Then the output should contain:
-      """
-      80/tcp   open  http
-      135/tcp  open  msrpc
-      443/tcp  open  https
-      1720/tcp open  h323q931
-      3389/tcp open  ms-wbt-server
-      """
-
+   @perf
    Scenario: Verify expected open ports in qa environment using the nmap fast flag
     When I launch an "nmap" attack with:
       """
-      nmap -F -open -Pn <hostname2>
+      nmap -F -open -Pn <hostname>
       """
     Then the output should contain:
       """
       80/tcp   open  http
-      443/tcp  open  https
-      1720/tcp open  h323q931
       """
 
-   Scenario: Verify expected open ports in performance environment using the nmap fast flag
+   @prod
+   Scenario: Verify expected open ports in qa environment using the nmap fast flag
     When I launch an "nmap" attack with:
       """
-      nmap -F -open -Pn <hostname3>
+      nmap -F -open -Pn <hostname>
       """
     Then the output should contain:
       """
-      80/tcp   open  http
-      443/tcp  open  https
-      1720/tcp open  h323q931
+      80/tcp
       """
 
-   Scenario: Verify expected open ports in production environment using the nmap fast flag
+   @quote
+   Scenario: Verify expected open ports in qa environment using the nmap fast flag
     When I launch an "nmap" attack with:
       """
-      nmap -F -open -Pn <hostname4>
+      nmap -F -open -Pn <hostname>
       """
     Then the output should contain:
       """
-      80/tcp  open  http
-      443/tcp open  https
+      80/tcp 
       """
-  Scenario: Verify that there are no unexpected ports open in the qa environment
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname1>
-      """
-    Then the output should not contain:
-      """
-      21/tcp
-      22/tcp
-      """
+
