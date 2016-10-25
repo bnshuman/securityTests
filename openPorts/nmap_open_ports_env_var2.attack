@@ -1,0 +1,92 @@
+@reallyslow
+
+Feature: nmap attacks
+  Background:
+    Given "nmap" is installed
+    And the following environment variables:
+      | name       | environment_variable_name |
+      | hostname1  | TEST_HOSTNAME1            |
+      | hostname2  | TEST_HOSTNAME2            |
+      | hostname3  | TEST_HOSTNAME3            |
+      | hostname4  | TEST_HOSTNAME4            |
+
+   Scenario: Verify expected open ports in Development environment using the nmap fast flag
+    When I launch an "nmap" attack with:
+      """
+      nmap -F -open -Pn <hostname1>
+      """
+    Then the output should contain:
+      """
+      80/tcp   open
+      """
+    And the output should contain:
+      """
+      443/tcp  open
+      """
+    And the output should contain:
+      """
+      1720/tcp open
+      """
+
+   Scenario: Verify expected open ports in QA environment using the nmap fast flag
+    When I launch an "nmap" attack with:
+      """
+      nmap -F -open -Pn <hostname2>
+      """
+    Then the output should contain:
+      """
+      80/tcp   open
+      """
+    And the output should contain:
+      """
+      443/tcp  open
+      """
+    And the output should contain:
+      """
+      1720/tcp open
+      """
+
+   Scenario: Verify expected open ports in Performance environment using the nmap fast flag
+    When I launch an "nmap" attack with:
+      """
+      nmap -F -open -Pn <hostname3>
+      """
+    Then the output should contain:
+      """
+      80/tcp   open
+      """
+    And the output should contain:
+      """
+      443/tcp  open
+      """
+    And the output should contain:
+      """
+      1720/tcp open
+      """
+   Scenario: Verify expected open ports in Production environment using the nmap fast flag
+    When I launch an "nmap" attack with:
+      """
+      nmap -F -open -Pn <hostname4>
+      """
+    Then the output should contain:
+      """
+      80/tcp  open
+      """
+    And the output should contain:
+      """
+      443/tcp open
+      """
+
+   Scenario: Verify that there are no unexpected ports open in the QA environment
+    When I launch an "nmap" attack with:
+      """
+      nmap -F -open -Pn <hostname1>
+      """
+    Then the output should not contain:
+      """
+      21/tcp
+      """
+    And the output should not contain:
+      """
+      22/tcp
+      """
