@@ -11,48 +11,38 @@ Background:
 Scenario: Ensure accepted Cipher Suites.
   When I launch an "sslyze" attack with:
     """
-    python <sslyze_path> --sslv3 <hostname>:443
+    sslyze --sslv3 <hostname>:443
     """
-  Then the output should contain:
+  Then the output should match:
     """
-    * SSLV3 Cipher Suites :
-
-          Preferred Cipher Suite:
+     AES128-SHA.*128
     """
-  And the output should contain:
+  And the output should match:
     """
-            AES128-SHA               128 bits
+    ECDHE-RSA-AES256-SHA.*256 bits
     """
-  And the output should contain:
+  And the output should match:
     """
-          Accepted Cipher Suite(s):
+    AES256-SHA.*256 bits
     """
-  And the output should contain:
+  And the output should match:
     """
-            ECDHE-RSA-AES256-SHA     256 bits
+    RC4-SHA.*128 bits
     """
-  And the output should contain:
+  And the output should match:
     """
-            AES256-SHA               256 bits
+    RC4-MD5.*128 bits
     """
-  And the output should contain:
+  And the output should match:
     """
-            RC4-SHA                  128 bits
+    ECDHE-RSA-AES128-SHA.*128 bits
     """
-  And the output should contain:
+  And the output should match:
     """
-            RC4-MD5                  128 bits
+    AES128-SHA.*128 bits
     """
-  And the output should contain:
+  And the output should match:
     """
-            ECDHE-RSA-AES128-SHA     128 bits
-    """
-  And the output should contain:
-    """
-            AES128-SHA               128 bits
-    """
-  And the output should contain:
-    """
-            DES-CBC3-SHA             112 bits
+    DES-CBC3-SHA.*112 bits
     """
 
