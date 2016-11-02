@@ -8,7 +8,7 @@ Background:
     | name     | environment_variable_name |
     | hostname | HOSTNAME |
 
-Scenario: Ensure accepted Cipher Suites
+Scenario: Ensure accepted Cipher Suites.
   When I launch an "sslyze" attack with:
     """
     python <sslyze_path> --sslv3 <hostname>:443
