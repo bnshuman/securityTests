@@ -1,0 +1,58 @@
+@reallyslow
+
+Feature: Run sslyze against a target
+
+Background:
+  Given "sslyze" is installed
+  And the following environment variables:
+    | name     | environment_variable_name |
+    | hostname | HOSTNAME |
+
+Scenario: Ensure accepted Cipher Suites
+  When I launch an "sslyze" attack with:
+    """
+    python <sslyze_path> --sslv3 <hostname>:443
+    """
+  Then the output should contain:
+    """
+    * SSLV3 Cipher Suites :
+
+          Preferred Cipher Suite:
+    """
+  And the output should contain:
+    """
+            AES128-SHA               128 bits
+    """
+  And the output should contain:
+    """
+          Accepted Cipher Suite(s):
+    """
+  And the output should contain:
+    """
+            ECDHE-RSA-AES256-SHA     256 bits
+    """
+  And the output should contain:
+    """
+            AES256-SHA               256 bits
+    """
+  And the output should contain:
+    """
+            RC4-SHA                  128 bits
+    """
+  And the output should contain:
+    """
+            RC4-MD5                  128 bits
+    """
+  And the output should contain:
+    """
+            ECDHE-RSA-AES128-SHA     128 bits
+    """
+  And the output should contain:
+    """
+            AES128-SHA               128 bits
+    """
+  And the output should contain:
+    """
+            DES-CBC3-SHA             112 bits
+    """
+
