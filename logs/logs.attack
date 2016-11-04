@@ -1,0 +1,30 @@
+Feature: curl logs attack
+
+Background:
+Given "curl" is installed
+And the following environment variables:
+    | name     | environment_variable_name|
+    | hostname | HOSTNAME                  |
+
+@logserver
+Scenario: Detects log files on this host
+When I launch a "curl" attack with:
+   """
+   curl http://<hostname>:8080/logs/
+   """
+
+Then the output should contain:
+   """
+   Index of 
+   """
+@newserver
+Scenario: Detects log files on this host
+When I launch a "curl" attack with:
+   """
+   curl http://<hostname>:8080/logs/
+   """
+
+Then the output should not contain:
+   """
+   Index of 
+   """
