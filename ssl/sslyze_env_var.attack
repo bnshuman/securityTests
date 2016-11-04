@@ -8,7 +8,7 @@ Background:
     | name     | environment_variable_name |
     | hostname | HOSTNAME |
 
-Scenario: Ensure accepted Cipher Suites.
+Scenario: Ensure accepted SSLv3 Cipher Suites
   When I launch an "sslyze" attack with:
     """
     sslyze --sslv3 <hostname>:443
@@ -45,4 +45,132 @@ Scenario: Ensure accepted Cipher Suites.
     """
     DES-CBC3-SHA.*112 bits
     """
-
+Scenario: Ensure accepted TLSv1 Cipher Suites
+  When I launch an "sslyze" attack with:
+    """
+    sslyze --tlsv1 <hostname>:443
+    """
+  Then the output should match:
+    """
+     AES128-SHA.*128
+    """
+  And the output should match:
+    """
+    ECDHE-RSA-AES256-SHA.*256 bits
+    """
+  And the output should match:
+    """
+    AES256-SHA.*256 bits
+    """
+  And the output should match:
+    """
+    RC4-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    RC4-MD5.*128 bits
+    """
+  And the output should match:
+    """
+    ECDHE-RSA-AES128-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    AES128-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    DES-CBC3-SHA.*112 bits
+    """
+Scenario: Ensure accepted TLSv1.1 Cipher Suites
+  When I launch an "sslyze" attack with:
+    """
+    sslyze --tlsv1_1 <hostname>:443
+    """
+  Then the output should match:
+    """
+    AES128-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    ECDHE-RSA-AES256-SHA.*256 bits
+    """
+  And the output should match:
+    """
+    AES256-SHA.*256 bits
+    """
+  And the output should match:
+    """
+    RC4-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    RC4-MD5.*128 bits
+    """
+  And the output should match:
+    """
+    ECDHE-RSA-AES128-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    AES128-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    DES-CBC3-SHA.*112 bits
+    """
+Scenario: Ensure accepted TLS1.2 Cipher Suites
+  When I launch an "sslyze" attack with:
+    """
+    sslyze --tlsv1_2 <hostname>:443
+    """
+  Then the output should match:
+    """
+     AES128-SHA.*128
+    """
+  And the output should match:
+    """
+    ECDHE-RSA-AES256-SHA.*256 bits
+    """
+  And the output should match:
+    """
+    AES256-SHA.*256 bits
+    """
+  And the output should match:
+    """
+    RC4-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    RC4-MD5.*128 bits
+    """
+  And the output should match:
+    """
+    ECDHE-RSA-AES128-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    AES128-SHA.*128 bits
+    """
+  And the output should match:
+    """
+    DES-CBC3-SHA.*112 bits
+    """
+Scenario: Ensure SSL Certificate is Trusted
+  When I launch an "sslyze" attack with:
+    """
+    sslyze --certinfo=basic <hostname>:443
+    """
+  Then the output should match:
+    """
+    Certificate is Trusted
+    """
+Scenario: Ensure Hostname Validation
+  When I launch an "sslyze" attack with:
+    """
+    sslyze --certinfo=basic <hostname>:443
+    """
+  Then the output should match:
+    """
+    OK - Common Name Matches
+    """
