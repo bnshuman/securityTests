@@ -1,13 +1,13 @@
 @slow
 
-Feature: nmap attacks for scanme.nmap.org and to use this for your tests, change the value in the profile
+Feature: nmap attacks to test for the presence of robots.txt 
   Background:
     Given "nmap" is installed
     And the following environment variables:
       | name       | environment_variable_name        |
       | hostname  | HOSTNAME |
       
-   @perf @prod @quote
+   @perf
    Scenario: Detects robots.txt file on this host.
     When I launch an "nmap" attack with:
       """
@@ -17,3 +17,15 @@ Feature: nmap attacks for scanme.nmap.org and to use this for your tests, change
       """
       | http-robots.txt:
       """
+      
+   @prod 
+   Scenario: Detects robots.txt file on this host.
+    When I launch an "nmap" attack with:
+      """
+      nmap -p80,443 --script http-robots.txt <hostname>
+      """
+    Then the output should not contain:
+      """
+      | http-robots.txt:
+      """
+      

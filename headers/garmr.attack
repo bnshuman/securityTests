@@ -33,11 +33,7 @@ Scenario: Use Garmr to scan a website for the Mozilla opioniated security requir
     """
     garmr -u https://<hostname> -o my_garmr_output.xml
     """
-  Then it should pass with:
-    """
-    [Garmr.corechecks.Http200Check] Fail The response code was 302
-    """
-  And the file "my_garmr_output.xml" should not contain XML:
+  Then the file "my_garmr_output.xml" should not contain XML:
     | css                                      |
     | testcase[name="Http200Check"] failure    |
 

@@ -7,36 +7,13 @@ Feature: nmap attacks
       | name       | environment_variable_name |
       | hostname  | HOSTNAME |
 
-   @perf
-   Scenario: Verify expected open ports in qa environment using the nmap fast flag
+   @perf @prod @quote
+   Scenario: Verify port 80 is open using the nmap fast flag
     When I launch an "nmap" attack with:
       """
       nmap -F -open -Pn <hostname>
       """
-    Then the output should contain:
+    Then the output should match:
       """
-      80/tcp   open  http
+      443\/tcp.*open.*https
       """
-
-   @prod
-   Scenario: Verify expected open ports in qa environment using the nmap fast flag
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname>
-      """
-    Then the output should contain:
-      """
-      80/tcp
-      """
-
-   @quote
-   Scenario: Verify expected open ports in qa environment using the nmap fast flag
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname>
-      """
-    Then the output should contain:
-      """
-      80/tcp 
-      """
-
