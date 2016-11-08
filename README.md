@@ -7,14 +7,15 @@ The attack files include checks for:
 * Standard security headers
 * Open ports
 * HTTP Methods
-* SQL Injection againsty vehicles
+* SQL Injection againsty vehicles (quote)
 * HTTP -> HTTPS redirect
+* SSL protocols and certificates
 
 These tests are meant to monitor environments for changes, not scan for security vulnerabilities.
 
 **Usage** 
 
-The attack files include tags for *@prod*, *@perf*, and *@quote*.
+The attack files include tags for *@prod*, *@perf*, *@quote*, *@logserver*, and *@newserver*.
 
 For example, run from the command line:
 env HOSTNAME=*hostname* /opt/gauntlt/bin/gauntlt -t *tag*
