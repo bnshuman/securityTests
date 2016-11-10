@@ -1,8 +1,6 @@
 FROM moomzni/gauntlt
 
-rpm --rebuilddb
-#RUN yum update 
-RUN yum -y install git 
+RUN (yum install -y git|| yum install -y git) 
 RUN rm -rf /opt/sqlmap
 RUN git clone https://github.com/sqlmapproject/sqlmap /opt/sqlmap
 
