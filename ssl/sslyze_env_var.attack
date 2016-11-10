@@ -1,5 +1,5 @@
 @reallyslow
-
+@perf
 Feature: Run sslyze against a target
 
 Background:
@@ -163,7 +163,7 @@ Scenario: Ensure SSL Certificate is Trusted
     """
   Then the output should match:
     """
-    Certificate is Trusted
+    Certificate is trusted
     """
 Scenario: Ensure Hostname Validation
   When I launch an "sslyze" attack with:
@@ -172,5 +172,5 @@ Scenario: Ensure Hostname Validation
     """
   Then the output should match:
     """
-    OK - Common Name Matches
+    Name matches
     """
