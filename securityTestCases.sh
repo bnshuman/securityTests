@@ -1,4 +1,4 @@
-#docker pull tgbenson/gauntlt
+docker pull tgbenson/gauntlt
 #docker run -e "HOSTNAME=e0.pncie.com" -v ~/securityTests/:/data tgbenson/gauntlt /bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'
 docker run -e "HOSTNAME=e1.pncie.com" -v ~/securityTests/:/data tgbenson/gauntlt /bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'
 docker run -e "HOSTNAME=e2.pncie.com" -v ~/securityTests/:/data tgbenson/gauntlt /bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'
