@@ -6,6 +6,8 @@ Tags:
 @prod
 @perf
 @quote
+@newserver
+@logserver
 
 Test
 Headers
