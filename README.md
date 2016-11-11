@@ -14,6 +14,7 @@ The attack files include checks for:
 These tests are meant to monitor environments for changes, not scan for security vulnerabilities.
 
 **Docker**
+
 To build the docker file, run docker build -t latest .
 
 To run via docker, run ./securityTestCases.sh
