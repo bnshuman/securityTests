@@ -10,4 +10,4 @@ inputs:
   
 run:
   #path: src/securityTestCases.sh
-  path: cd src;ls
+  path: ls -R
