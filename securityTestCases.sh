@@ -8,4 +8,5 @@ echo "start"
 #docker run -e "HOSTNAME=e4.pncie.com" -v $(pwd):/data tgbenson/gauntlt /bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'
 #docker run -e "HOSTNAME=csaa-insurance.aaa.com" -v $(pwd):/data tgbenson/gauntlt /bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @prod"'
 #docker run -e "HOSTNAME=quote.ds-csaa.io" -v $(pwd):/data tgbenson/gauntlt /bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @quote"'
-export HOSTNAME="e1.pncie.com" /bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'
+export HOSTNAME="e1.pncie.com" 
+/bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'
