@@ -24,11 +24,13 @@ To run via docker, run ./securityTestCases.sh
 The attack files include tags for *@prod*, *@perf*, *@quote*, *@logserver*, and *@newserver*.
 
 For example, run from the command line:
+```
 env HOSTNAME=*hostname* /opt/gauntlt/bin/gauntlt -t *tag*
-
+```
 **Concourse**
 For the pipeline.yaml:
 
+```
 resources:
   - name: src
     type: git
@@ -43,7 +45,8 @@ jobs:
     trigger: true
   - task: test
     file: src/securitytest.yml
-    
+```    
 To start the pipeline:
-
+```
   fly sp -t <target> -c pipeline.yml -p <pipelineName>
+```
