@@ -1,3 +1,5 @@
+#! /bin/bash
+ls
 echo "start"
 #docker pull tgbenson/gauntlt
 #docker run -e "HOSTNAME=e0.pncie.com" -v $(pwd):/data tgbenson/gauntlt /bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'
