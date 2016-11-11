@@ -19,3 +19,24 @@ The attack files include tags for *@prod*, *@perf*, *@quote*, *@logserver*, and 
 
 For example, run from the command line:
 env HOSTNAME=*hostname* /opt/gauntlt/bin/gauntlt -t *tag*
+
+For the pipeline.yaml:
+
+resources:
+  - name: src
+    type: git
+    source:
+      uri: https://github.com/aaa-ncnu-ie/securityTests.git
+      branch: master
+
+jobs:
+- name: test
+  plan:
+  - get: src
+    trigger: true
+  - task: test
+    file: src/securitytest.yml
+    
+To start the pipeline:
+
+  fly sp -t <target> -c pipeline.yml -p <pipelineName>
