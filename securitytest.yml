@@ -12,4 +12,5 @@ run:
   #path: src/securityTestCases.sh
   path: ls
   args:
+  - /opt
   - -R
