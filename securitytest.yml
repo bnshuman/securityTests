@@ -9,8 +9,5 @@ inputs:
   - name: src
   
 run:
-  #path: src/securityTestCases.sh
-  path: ls
-  args:
-  - src
-  - -R
+  path: src/securityTestCases.sh
+
