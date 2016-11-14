@@ -1,21 +1,16 @@
-platform: linux
-
-image_resources:
-    type: docker
-    source:
-      repository: tgbenson/gauntlt
-      tag: latest
-
 resources:
-  - name: timer
-    type: time
-    source:
-      interval: 60m
+- name: timer
+  type: time
+  source:
+    interval: 60m
+- name: gauntlt-image
+  source:
+    repositoty: tgbenson/gauntlt
+  type: docker-image
 
 jobs:
 - name: securityTests
   plan:
   - get: timer
     trigger: true
-  - task: run-security-tests
-    file: /opt/securityTests/securitytest.yml 
+  - get: gauntlt-image 
