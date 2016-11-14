@@ -5,12 +5,20 @@ resources:
     interval: 60m
 - name: gauntlt-image
   source:
-    repositoty: tgbenson/gauntlt
+    repository: tgbenson/gauntlt
   type: docker-image
-
+- name: source
+  source: git
+    source: 
+      uri: https://github.com/aaa-ncnu-ie/securityTests.git
+      branch: master
 jobs:
 - name: securityTests
   plan:
+  - get: source
+    trigger: false
   - get: timer
     trigger: true
   - get: gauntlt-image 
+  - task: run-tests
+    path: source/concourseSecurityTestCases.sh 
