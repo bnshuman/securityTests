@@ -1,20 +1,21 @@
-resources:
-  - name: src
-    type: git
+platform: linux
+
+image_resources:
+    type: docker
     source:
-      uri: https://github.com/aaa-ncnu-ie/securityTests.git
-      branch: master
+      repository: tgbenson/gauntlt
+      tag: latest
+
+resources:
   - name: timer
     type: time
     source:
       interval: 60m
 
 jobs:
-- name: test
+- name: securityTests
   plan:
-  - get: src
-    trigger: false
   - get: timer
     trigger: true
-  - task: test
-    file: src/securitytest.yml
+  - task: run-security-tests
+    file: /opt/securityTests/securitytest.yml 
