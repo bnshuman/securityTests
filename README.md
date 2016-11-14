@@ -1,5 +1,5 @@
 
-The files in this project include attack files to be run within the Gauntlt framework. 
+The files in this project include attack files to be run within the Gauntlt framework (on a guntlt docker image). 
 
 The attack files include checks for:
 
@@ -13,15 +13,29 @@ The attack files include checks for:
 
 These tests are meant to monitor environments for changes, not scan for security vulnerabilities.
 
+**Docker**
+
+To build the docker file, run 
+```
+docker build -t latest .
+```
+To run via docker, run 
+```
+./securityTestCases.sh
+```
+
 **Usage** 
 
 The attack files include tags for *@prod*, *@perf*, *@quote*, *@logserver*, and *@newserver*.
 
 For example, run from the command line:
+```
 env HOSTNAME=*hostname* /opt/gauntlt/bin/gauntlt -t *tag*
-
+```
+**Concourse**
 For the pipeline.yaml:
 
+```
 resources:
   - name: src
     type: git
@@ -36,7 +50,8 @@ jobs:
     trigger: true
   - task: test
     file: src/securitytest.yml
-    
+```    
 To start the pipeline:
-
+```
   fly sp -t <target> -c pipeline.yml -p <pipelineName>
+```
