@@ -1,0 +1,12 @@
+resources:
+  - name: resource-ci
+    type: git
+    source: 
+      uri: https://github.com/aaa-ncnu-ie/securityTests.git
+
+jobs:
+  - name: tests
+    plan:
+    - get: resource-ci
+    - task: run-tests
+      file: resource-ci/ci/run-security-tests.yml

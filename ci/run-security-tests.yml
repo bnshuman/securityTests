@@ -1,0 +1,11 @@
+platform: linux
+
+image_resources:
+  type: docker
+  source: tgbenson/gauntlt
+
+inputs:
+  - name: resource-ci
+
+run:
+  path: ls
