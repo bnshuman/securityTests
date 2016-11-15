@@ -25,7 +25,7 @@ jobs:
             repository: tgbenson/gauntlt
             tag: latest
         run: 
-          path: ./gauntlt-repo/e3-SecurityTestCases.sh
+          path: gauntlt-repo/e3-SecurityTestCases.sh
   - name: e2
     plan:
     - get: timer
@@ -42,7 +42,7 @@ jobs:
             repository: tgbenson/gauntlt
             tag: latest
         run: 
-          path: ./gauntlt-repo/e2-SecurityTestCases.sh
+          path: gauntlt-repo/e2-SecurityTestCases.sh
   - name: e1
     plan:
     - get: timer
@@ -59,7 +59,7 @@ jobs:
             repository: tgbenson/gauntlt
             tag: latest
         run: 
-          path: ./gauntlt-repo/e1-SecurityTestCases.sh
+          path: gauntlt-repo/e1-SecurityTestCases.sh
   - name: quote    
     plan:
     - get: timer
@@ -76,7 +76,7 @@ jobs:
             repository: tgbenson/gauntlt
             tag: latest
         run: 
-          path: ./gauntlt-repo/quote-SecurityTestCases.sh
+          path: gauntlt-repo/quote-SecurityTestCases.sh
   - name: prod    
     plan:
     - get: timer
@@ -93,4 +93,4 @@ jobs:
             repository: tgbenson/gauntlt
             tag: latest
         run: 
-          path: ./gauntlt-repo/prod-SecurityTestCases.sh
+          path: gauntlt-repo/prod-SecurityTestCases.sh
