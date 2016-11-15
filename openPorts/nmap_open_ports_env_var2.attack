@@ -7,128 +7,36 @@ Feature: nmap attacks
       | name       | environment_variable_name |
       | hostname   | HOSTNAME |
   
-   @dev
-   Scenario: Verify expected open ports in Development environment using the nmap fast flag
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname>
-      """
-    Then the output should contain:
-      """
-      80/tcp   open
-      """
-    And the output should contain:
-      """
-      443/tcp  open
-      """
-    And the output should contain:
-      """
-      1720/tcp open
-      """
-   @qa
-   Scenario: Verify expected open ports in Development environment using the nmap fast flag
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname>
-      """
-    Then the output should contain:
-      """
-      80/tcp   open
-      """
-    And the output should contain:
-      """
-      443/tcp  open
-      """
-    And the output should contain:
-      """
-      1720/tcp open
-      """
    @perf
    Scenario: Verify expected open ports in Development environment using the nmap fast flag
     When I launch an "nmap" attack with:
       """
       nmap -F -open -Pn <hostname>
       """
-    Then the output should contain:
+    Then the output should match:
       """
-      80/tcp   open
+      80\/tcp.*open
       """
-    And the output should contain:
+    And the output should match:
       """
-      443/tcp  open
+      443\/tcp.*open
       """
-    And the output should contain:
+    And the output should match:
       """
-      1720/tcp open
+      1720\/tcp.*open
       """
-   @prod
+   @prod @quote
    Scenario: Verify expected open ports in Production environment using the nmap fast flag
     When I launch an "nmap" attack with:
       """
       nmap -F -open -Pn <hostname>
       """
-    Then the output should contain:
+    Then the output should match:
       """
-      80/tcp  open
+      80\/tcp.*open
       """
-    And the output should contain:
+    And the output should match:
       """
-      443/tcp open
-      """
-   @dev
-   Scenario: Verify that there are no unexpected ports open in the QA environment
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname>
-      """
-    Then the output should not contain:
-      """
-      21/tcp
-      """
-    And the output should not contain:
-      """
-      22/tcp
-      """
-   @qa
-   Scenario: Verify that there are no unexpected ports open in the QA environment
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname>
-      """
-    Then the output should not contain:
-      """
-      21/tcp
-      """
-    And the output should not contain:
-      """
-      22/tcp
-      """
-   @perf
-   Scenario: Verify that there are no unexpected ports open in the QA environment
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname>
-      """
-    Then the output should not contain:
-      """
-      21/tcp
-      """
-    And the output should not contain:
-      """
-      22/tcp
-      """
-   @prod
-   Scenario: Verify that there are no unexpected ports open in the QA environment
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname>
-      """
-    Then the output should not contain:
-      """
-      21/tcp
-      """
-    And the output should not contain:
-      """
-      22/tcp
+      443\/tcp.*open
       """
 
