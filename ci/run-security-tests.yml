@@ -10,4 +10,4 @@ inputs:
   - name: resource-ci
 
 run:
-  path: resource-ci/concourseSecurityTestCases.sh
+  path: /usr/bin/scl enable ruby193 python27 "export HOSTNAME='e3.pncie.com';gauntlt /opt/securityTests/ -t @perf"

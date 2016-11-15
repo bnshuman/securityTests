@@ -3,9 +3,13 @@ resources:
     type: git
     source: 
       uri: https://github.com/aaa-ncnu-ie/securityTests.git
+  - name: timer
+    type: time
+    source:
+      interval: 60m
 
 jobs:
-  - name: tests
+  - name: securityTests
     plan:
     - get: resource-ci
     - task: run-tests
