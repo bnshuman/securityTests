@@ -1,5 +1,5 @@
 resources:
-  - name: resource-ci
+  - name: gauntlt-repo
     type: git
     source: 
       uri: https://github.com/aaa-ncnu-ie/securityTests.git
@@ -11,6 +11,18 @@ resources:
 jobs:
   - name: securityTests
     plan:
-    - get: resource-ci
+    - get: timer
+      trigger: true
+    - get: gauntlt-repo
     - task: run-tests
-      file: resource-ci/ci/run-security-tests.yml
+      config:
+        platform: linux
+        inputs:
+        - name: gauntlt-repo
+        image_resource:
+          type: docker-image
+          source:
+            repository: tgbenson/gauntlt
+            tag: latest
+        run: 
+          path: ./gauntlt-repo/concourseSecurityTestCases.sh

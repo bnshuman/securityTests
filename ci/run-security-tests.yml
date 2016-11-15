@@ -9,5 +9,4 @@ image_resource:
 inputs:
   - name: resource-ci
 
-run:
-  path: /usr/bin/scl enable ruby193 python27 "export HOSTNAME='e3.pncie.com';gauntlt -t @perf"
+run: /bin/bash -c '/usr/bin/scl enable ruby193 python27 "export HOSTNAME=e3.pncie.com;gauntlt -f progress -t @perf"
