@@ -10,4 +10,4 @@ inputs:
   - name: resource-ci
 
 run:
-  path: ls
+  path: resource-ci/concourseSecurityTestCases.sh
