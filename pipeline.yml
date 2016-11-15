@@ -4,11 +4,6 @@ resources:
   source:
     interval: 60m
 
-- name: gauntlt-image
-  source:
-    repository: tgbenson/gauntlt
-  type: docker-image
-
 - name: src
   type: git
   source: 
@@ -17,15 +12,14 @@ resources:
 
 jobs:
 - name: securityTests
-  plan:
-  - get: src
-    trigger: false
   - get: timer
     trigger: true
-  - get: gauntlt-image 
   - task: run-tests
     config:
+      image: docker:///tgbenson/gauntlt
       platform: linux
+      inputs:
+        - name: src
       run:
         path: ls
-        arg:
+        arg: []
