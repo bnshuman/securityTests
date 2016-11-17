@@ -39,24 +39,24 @@ jobs:
             tag: latest
         run: 
           path: gauntlt-repo/e3-SecurityTestCases.sh
-        on_failure:
-          put: slack-alert
-          params:
-            always_notify: true
-            icon_emoji: ":ship:"
-            channel: "#security"
-            text_file: ci/last_commit_hash
-            text: |
-              Security test, failures
-        on_success:
-          put: slack-alert
-          params:
-            channel: "#security"
-            always_notify: true
-            icon_emoji: ":ship:"
-            text_file: ./cardinal-repo/ci/last_commit_hash
-            text: |
-              Security test, success
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - e3
+      on_success:
+        put: slack-alert
+        params:
+          channel: "#security"
+          always_notify: true
+          icon_emoji: ":ship:"
+          text_file: ./cardinal-repo/ci/last_commit_hash
+          text: |
+            Security test, success - e3
 
   - name: e2
     plan:
@@ -75,6 +75,25 @@ jobs:
             tag: latest
         run: 
           path: gauntlt-repo/e2-SecurityTestCases.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - e2
+      on_success:
+        put: slack-alert
+        params:
+          channel: "#security"
+          always_notify: true
+          icon_emoji: ":ship:"
+          text_file: ./cardinal-repo/ci/last_commit_hash
+          text: |
+            Security test, success - e2
+
   - name: e1
     plan:
     - get: timer
@@ -92,6 +111,25 @@ jobs:
             tag: latest
         run: 
           path: gauntlt-repo/e1-SecurityTestCases.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - e1
+      on_success:
+        put: slack-alert
+        params:
+          channel: "#security"
+          always_notify: true
+          icon_emoji: ":ship:"
+          text_file: ./cardinal-repo/ci/last_commit_hash
+          text: |
+            Security test, success - e1
+
   - name: quote    
     plan:
     - get: timer
@@ -109,6 +147,25 @@ jobs:
             tag: latest
         run: 
           path: gauntlt-repo/quote-SecurityTestCases.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - quote
+      on_success:
+        put: slack-alert
+        params:
+          channel: "#security"
+          always_notify: true
+          icon_emoji: ":ship:"
+          text_file: ./cardinal-repo/ci/last_commit_hash
+          text: |
+            Security test, success - quote
+
   - name: prod    
     plan:
     - get: timer
@@ -126,3 +183,22 @@ jobs:
             tag: latest
         run: 
           path: gauntlt-repo/prod-SecurityTestCases.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - prod
+      on_success:
+        put: slack-alert
+        params:
+          channel: "#security"
+          always_notify: true
+          icon_emoji: ":ship:"
+          text_file: ./cardinal-repo/ci/last_commit_hash
+          text: |
+            Security test, success - prod
+
