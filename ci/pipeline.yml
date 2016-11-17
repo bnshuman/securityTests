@@ -1,12 +1,25 @@
+resource_types:
+- name: slack-notifications
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+
 resources:
   - name: gauntlt-repo
     type: git
     source: 
       uri: https://github.com/aaa-ncnu-ie/securityTests.git
+
   - name: timer
     type: time
     source:
       interval: 60m
+
+  - name: slack-alert
+    type: slack-notifications
+    source:
+      url: https://hooks.slack.com/services/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
+
 
 jobs:
   - name: e3
@@ -26,6 +39,25 @@ jobs:
             tag: latest
         run: 
           path: gauntlt-repo/e3-SecurityTestCases.sh
+        on_failure:
+          put: slack-alert
+          params:
+            always_notify: true
+            icon_emoji: ":ship:"
+            channel: "#security"
+            text_file: ci/last_commit_hash
+            text: |
+              Security test, failures
+        on_success:
+          put: slack-alert
+          params:
+            channel: "#security"
+            always_notify: true
+            icon_emoji: ":ship:"
+            text_file: ./cardinal-repo/ci/last_commit_hash
+            text: |
+              Security test, success
+
   - name: e2
     plan:
     - get: timer
