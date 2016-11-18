@@ -48,15 +48,6 @@ jobs:
           text_file: ci/last_commit_hash
           text: |
             Security test, failures - e3
-      on_success:
-        put: slack-alert
-        params:
-          channel: "#security"
-          always_notify: true
-          icon_emoji: ":ship:"
-          text_file: ./cardinal-repo/ci/last_commit_hash
-          text: |
-            Security test, success - e3
 
   - name: e2
     plan:
@@ -84,15 +75,6 @@ jobs:
           text_file: ci/last_commit_hash
           text: |
             Security test, failures - e2
-      on_success:
-        put: slack-alert
-        params:
-          channel: "#security"
-          always_notify: true
-          icon_emoji: ":ship:"
-          text_file: ./cardinal-repo/ci/last_commit_hash
-          text: |
-            Security test, success - e2
 
   - name: e1
     plan:
@@ -120,15 +102,6 @@ jobs:
           text_file: ci/last_commit_hash
           text: |
             Security test, failures - e1
-      on_success:
-        put: slack-alert
-        params:
-          channel: "#security"
-          always_notify: true
-          icon_emoji: ":ship:"
-          text_file: ./cardinal-repo/ci/last_commit_hash
-          text: |
-            Security test, success - e1
 
   - name: quote    
     plan:
@@ -156,15 +129,6 @@ jobs:
           text_file: ci/last_commit_hash
           text: |
             Security test, failures - quote
-      on_success:
-        put: slack-alert
-        params:
-          channel: "#security"
-          always_notify: true
-          icon_emoji: ":ship:"
-          text_file: ./cardinal-repo/ci/last_commit_hash
-          text: |
-            Security test, success - quote
 
   - name: prod    
     plan:
@@ -192,13 +156,5 @@ jobs:
           text_file: ci/last_commit_hash
           text: |
             Security test, failures - prod
-      on_success:
-        put: slack-alert
-        params:
-          channel: "#security"
-          always_notify: true
-          icon_emoji: ":ship:"
-          text_file: ./cardinal-repo/ci/last_commit_hash
-          text: |
-            Security test, success - prod
+
 
