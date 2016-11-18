@@ -7,25 +7,7 @@ Feature: nmap attacks
       | name       | environment_variable_name |
       | hostname   | HOSTNAME |
   
-   @perf
-   Scenario: Verify expected open ports in Development environment using the nmap fast flag
-    When I launch an "nmap" attack with:
-      """
-      nmap -F -open -Pn <hostname>
-      """
-    Then the output should match:
-      """
-      80\/tcp.*open
-      """
-    And the output should match:
-      """
-      443\/tcp.*open
-      """
-    And the output should match:
-      """
-      1720\/tcp.*open
-      """
-   @prod @quote
+   @prod @quote @perf
    Scenario: Verify expected open ports in Production environment using the nmap fast flag
     When I launch an "nmap" attack with:
       """
