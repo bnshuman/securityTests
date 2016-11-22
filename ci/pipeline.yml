@@ -22,7 +22,7 @@ resources:
 
 
 jobs:
-  - name: e3
+  - name: securityTest-e3
     plan:
     - get: timer
       trigger: true
@@ -49,7 +49,7 @@ jobs:
           text: |
             Security test, failures - e3
 
-  - name: e2
+  - name: securityTest-e2
     plan:
     - get: timer
       trigger: true
@@ -76,7 +76,7 @@ jobs:
           text: |
             Security test, failures - e2
 
-  - name: e1
+  - name: securityTest-e1
     plan:
     - get: timer
       trigger: true
@@ -103,7 +103,7 @@ jobs:
           text: |
             Security test, failures - e1
 
-  - name: quote    
+  - name: securityTest-quote    
     plan:
     - get: timer
       trigger: true
@@ -130,7 +130,7 @@ jobs:
           text: |
             Security test, failures - quote
 
-  - name: prod    
+  - name: securityTest-prod    
     plan:
     - get: timer
       trigger: true
