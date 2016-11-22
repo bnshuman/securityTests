@@ -1,5 +1,4 @@
 @reallyslow
-@perf @prod @quote
 Feature: Run testssl against a target
 
 Background:
@@ -8,6 +7,18 @@ Background:
     | name     | environment_variable_name |
     | hostname | HOSTNAME |
 
+@quote
+Scenario: Check for SSL vulnerabilities
+  When I launch an "sslyze" attack with:
+    """
+    /opt/securityTests/ssl/ssl-vulns.sh <hostname>
+    """
+  Then the output should contain:
+    """
+    6\n
+    """
+
+@perf @prod 
 Scenario: Check for SSL vulnerabilities
   When I launch an "sslyze" attack with:
     """
@@ -17,6 +28,8 @@ Scenario: Check for SSL vulnerabilities
     """
     5\n
     """
+
+@perf @prod @quote
 Scenario: Check for soon to expire ssl certs 
   When I launch an "sslyze" attack with:
     """
