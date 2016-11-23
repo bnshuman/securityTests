@@ -35,7 +35,7 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: tgbenson/gauntlt
+            repository: csaa/security-gauntlt
             tag: latest
         run: 
           path: gauntlt-repo/e3-SecurityTestCases.sh
@@ -62,7 +62,7 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: tgbenson/gauntlt
+            repository: csaa/security-gauntlt
             tag: latest
         run: 
           path: gauntlt-repo/e2-SecurityTestCases.sh
@@ -89,7 +89,7 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: tgbenson/gauntlt
+            repository: csaa-security-gauntlt
             tag: latest
         run: 
           path: gauntlt-repo/e1-SecurityTestCases.sh
@@ -116,7 +116,7 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: tgbenson/gauntlt
+            repository: csaa/security-gauntlt
             tag: latest
         run: 
           path: gauntlt-repo/quote-SecurityTestCases.sh
@@ -143,7 +143,7 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: tgbenson/gauntlt
+            repository: csaa/security-gauntlt
             tag: latest
         run: 
           path: gauntlt-repo/prod-SecurityTestCases.sh
