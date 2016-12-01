@@ -1,0 +1,7 @@
+---
+platform: linux
+inputs:
+  - { name: securitytests-repo } 
+run:
+  dir: git-securitychecks-repo
+  path: ../e3-SecurityTestCases.sh
