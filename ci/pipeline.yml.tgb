@@ -1,0 +1,170 @@
+resource_types:
+- name: slack-notifications
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+
+resources:
+  - name: gauntlt-repo
+    type: git
+    source: 
+      uri: https://github.com/aaa-ncnu-ie/securityTests.git
+
+  - name: securityCheck-repo
+    type: git
+    source:
+      uri: https://github.com/aaa-ncnu-ie/securityChecks.git
+
+  - name: timer
+    type: time
+    source:
+      interval: 60m
+
+  - name: slack-alert
+    type: slack-notifications
+    source:
+      url: https://hooks.slack.com/services/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
+
+
+jobs:
+  - name: run-security-tests
+    plan:
+    - get: timer
+      trigger: true
+    - get: securityCheck-repo
+    - task: run-check-prod
+      config:
+        platform: linux
+        inputs:
+        - name: securityCheck-repo
+        image_resource:
+          type: docker-image
+          source:
+            repository: tgbenson/securityCheck
+            tag: latest
+        params:
+          DATADOG_APIKEY: 8a91bd828137db6e599e3932c20ef336
+          DATADOG_APPKEY: 249629b031233b4c14fd129cf74c03bebb77b8e8
+          URLS: csaaMasterURLList.txt
+          APP: prod
+          SERVER: csaa-insurance.aaa.com
+          ACCESS: csaaaccessControl.txt
+          UNENCRYPT: csaaunencryptControl.txt
+        run:
+          path: securityCheck-repo/securityChecks.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - securityCheck-Prod
+    - task: run-tests-e3
+      config:
+        platform: linux
+        inputs:
+        - name: gauntlt-repo
+        image_resource:
+          type: docker-image
+          source:
+            repository: csaa/security-gauntlt
+            tag: latest
+        run: 
+          path: gauntlt-repo/e3-SecurityTestCases.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - e3
+    - task: run-tests-e2
+      config:
+        platform: linux
+        inputs:
+        - name: gauntlt-repo
+        image_resource:
+          type: docker-image
+          source:
+            repository: csaa/security-gauntlt
+            tag: latest
+        run: 
+          path: gauntlt-repo/e2-SecurityTestCases.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - e2
+    - task: run-tests-e1
+      config:
+        platform: linux
+        inputs:
+        - name: gauntlt-repo
+        image_resource:
+          type: docker-image
+          source:
+            repository: csaa/security-gauntlt
+            tag: latest
+        run: 
+          path: gauntlt-repo/e1-SecurityTestCases.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - e1
+    - task: run-tests-quote
+      config:
+        platform: linux
+        inputs:
+        - name: gauntlt-repo
+        image_resource:
+          type: docker-image
+          source:
+            repository: csaa/security-gauntlt
+            tag: latest
+        run: 
+          path: gauntlt-repo/quote-SecurityTestCases.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - quote
+    - task: run-tests-prod
+      config:
+        platform: linux
+        inputs:
+        - name: gauntlt-repo
+        image_resource:
+          type: docker-image
+          source:
+            repository: csaa/security-gauntlt
+            tag: latest
+        run: 
+          path: gauntlt-repo/prod-SecurityTestCases.sh
+      on_failure:
+        put: slack-alert
+        params:
+          always_notify: true
+          icon_emoji: ":ship:"
+          channel: "#security"
+          text_file: ci/last_commit_hash
+          text: |
+            Security test, failures - prod
+
+
