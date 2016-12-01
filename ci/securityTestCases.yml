@@ -4,4 +4,4 @@ inputs:
   - { name: securitytests-repo } 
 run:
   dir: git-securitychecks-repo
-  path: /bin/bash -c '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'
+  path: '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'
