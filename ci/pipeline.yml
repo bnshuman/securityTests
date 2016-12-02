@@ -58,6 +58,7 @@ jobs:
         file: git-securitytests-repo/ci/e3.yml
         params:
           HOSTNAME: e3.pncie.com
+    - aggregate:
       - task: run-tests-prod
         inputs:
         - name: git-securitytests-repo
