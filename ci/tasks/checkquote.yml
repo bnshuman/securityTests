@@ -1,7 +1,0 @@
----
-platform: linux
-inputs:
-  - { name: securitychecks-repo } 
-run:
-  dir: securitychecks-repo
-  path: ./securityChecks.sh

@@ -1,7 +1,0 @@
----
-platform: linux
-inputs:
-  - { name: securitytests-repo } 
-run:
-  dir: git-securitychecks-repo
-  path: '/usr/bin/scl enable ruby193 python27 "gauntlt -f progress -t @perf"'

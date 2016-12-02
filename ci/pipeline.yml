@@ -14,38 +14,20 @@ resources:
     type: time
     source:
       interval: 60m
+      
+  - name: git-securitychecks-repo
+    type: git
+    source:
+      uri: https://github.com/aaa-ncnu-ie/securityChecks.git
+
+  - name: securitychecks-image
+    type: docker-image
+    source:
+      repository: tgbenson/securitychecks
+      tag: latest
 
 jobs:
-  - name: run-security-tests-e3
-    plan:
-    - get: git-securitytests-repo 
-      trigger: false
-    - get: securitytests-image
-      trigger: false
-    - get: timer
-      trigger: true
-    - task: run-tests-e3
-      inputs:
-      - name: git-securitytests-repo
-      image: securitytests-image
-      file: git-securitytests-repo/ci/check.yml
-  - name: run-security-tests-e2
-    serial: false
-    plan:
-    - aggregate:
-      - get: git-securitytests-repo
-        trigger: false
-      - get: securitytests-image
-        trigger: false
-    - task: run-tests-e2
-      config:
-        platform: linux
-        inputs:
-        - name: git-securitytests-repo
-        image: securitytests-image 
-        run: 
-          path: git-securitytests-repo/e2-SecurityTestCases.sh 
-  - name: run-security-tests-e1
+  - name: run-security-tests
     plan:
     - aggregate:
       - get: git-securitytests-repo
@@ -54,43 +36,74 @@ jobs:
         trigger: false
       - get: timer
         trigger: true
-    - task: run-tests-e1
-      inputs:
-      - name: git-securitytests-repo
-      image: securitytests-image
-      file: git-securitytests-repo/ci/securityTestCases.yml 
-      params:
-        HOSTNAME: e1.pncie.com
-  - name: run-security-tests-prod
-    serial: false
+    - aggregate:
+      - task: run-tests-e1
+        inputs:
+        - name: git-securitytests-repo
+        image: securitytests-image
+        file: git-securitytests-repo/ci/e1.yml
+        params:
+          HOSTNAME: e1.pncie.com
+      - task: run-tests-e2
+        inputs:
+        - name: git-securitytests-repo
+        image: securitytests-image
+        file: git-securitytests-repo/ci/e2.yml
+        params:
+          HOSTNAME: e2.pncie.com  
+      - task: run-tests-e3
+        inputs:
+        - name: git-securitytests-repo
+        image: securitytests-image
+        file: git-securitytests-repo/ci/e3.yml
+        params:
+          HOSTNAME: e3.pncie.com
+      - task: run-tests-prod
+        inputs:
+        - name: git-securitytests-repo
+        image: securitytests-image
+        file: git-securitytests-repo/ci/prod.yml
+        params:
+          HOSTNAME: csaa-insurance.aaa.com  
+      - task: run-tests-quote
+        inputs:
+        - name: git-securitytests-repo
+        image: securitytests-image
+        file: git-securitytests-repo/ci/quote.yml
+        params:
+          HOSTNAME: quote.ds-csaa.io           
+  - name: run-security-checks
     plan:
     - aggregate:
-      - get: git-securitytests-repo
-        trigger: false
       - get: timer
         trigger: true
-      - get: securitytests-image
-    - task: run-tests-prod
-      config:
-        platform: linux
-        inputs:
-        - name: git-securitytests-repo
-        image: securitytests-image 
-        run: 
-          path: git-securitytests-repo/prod-SecurityTestCases.sh 
-  - name: run-security-tests-quote
-    serial: false
-    plan:
-    - get: git-securitytests-repo
-      trigger: false
-    - get: timer
-      trigger: true
-    - get: securitytests-image
-    - task: run-tests-quote
-      config:
-        platform: linux
-        inputs:
-        - name: git-securitytests-repo
-        image: securitytests-image 
-        run: 
-          path: git-securitytests-repo/quote-SecurityTestCases.sh 
+      - get: securitychecks-repo
+        resource: git-securitychecks-repo
+        trigger: false
+      - get: securitychecks-image
+    - task: run-securitychecks-quote
+      inputs:
+      - name: securitychecks-repo
+      file: securitychecks-repo/ci/check.yml
+      image: securitychecks-image
+      params: 
+        DATADOG_APIKEY: 8a91bd828137db6e599e3932c20ef336
+        DATADOG_APPKEY: 249629b031233b4c14fd129cf74c03bebb77b8e8
+        URLS: quoteMasterURLList.txt
+        APP: quote
+        SERVER: quote.ds-csaa.io
+        ACCESS: quoteAccessControl.txt
+        UNENCRYPT: quoteUnencryptControl.txt
+    - task: run-securitychecks-prod
+      inputs:
+       - name: securitychecks-repo
+      file: securitychecks-repo/ci/check.yml
+      image: securitychecks-image 
+      params: 
+        DATADOG_APIKEY: 8a91bd828137db6e599e3932c20ef336
+        DATADOG_APPKEY: 249629b031233b4c14fd129cf74c03bebb77b8e8
+        URLS: csaaMasterURLList.txt
+        APP: prod
+        SERVER: csaa-insurance.aaa.com 
+        ACCESS: csaaaccessControl.txt
+        UNENCRYPT: csaaunencryptControl.txt
