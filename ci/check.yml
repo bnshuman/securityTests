@@ -1,7 +1,7 @@
 ---
 platform: linux
 inputs:
-  - { name: securitytests-repo } 
+  - { name: git-securitytests-repo } 
 run:
-  dir: git-securitychecks-repo
+  dir: git-securitytests-repo
   path: ./quote-SecurityTestCases.sh
