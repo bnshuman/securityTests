@@ -1,6 +1,5 @@
 FROM moomzni/gauntlt
 
-RUN apt-get update 
 RUN pip install datadog
 RUN yum install -y git || true 
 RUN rm -rf /opt/sqlmap
