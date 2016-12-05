@@ -168,7 +168,7 @@ Scenario: Ensure SSL Certificate is Trusted
 Scenario: Ensure Hostname Validation
   When I launch an "sslyze" attack with:
     """
-    sslyze --certinfo=basic <hostname>:443
+    sslyze --certinfo_basic <hostname>:443
     """
   Then the output should match:
     """
