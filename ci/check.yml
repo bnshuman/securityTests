@@ -4,4 +4,5 @@ inputs:
   - { name: git-securitytests-repo } 
 run:
   dir: git-securitytests-repo
-  path: /opt/gauntlt/bin/gauntlt -t @perf
+  path: /opt/gauntlt/bin/gauntlt 
+  args: -t @perf
