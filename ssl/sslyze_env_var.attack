@@ -159,7 +159,7 @@ Scenario: Ensure accepted TLS1.2 Cipher Suites
 Scenario: Ensure SSL Certificate is Trusted
   When I launch an "sslyze" attack with:
     """
-    sslyze --certinfo=basic <hostname>:443
+    sslyze --certinfo_basic <hostname>:443
     """
   Then the output should match:
     """
