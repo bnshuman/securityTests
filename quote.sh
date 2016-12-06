@@ -1,3 +1,3 @@
 #! /bin/bash
-export HOSTNAME="quote.digital.pncie.com"
-gauntlt @quote
+export SSLYZE_PATH=/usr/bin/sslyze
+/opt/gauntlt/bin/gauntlt -f progress -t @quote
