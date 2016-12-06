@@ -48,5 +48,15 @@ Scenario: Check for soon to expire ssl certs
     """
   Then the output should contain:
     """
-    0\n
+    TODD
+    """
+    @perf @prod @quote
+Scenario: Check for soon to expire ssl certs 
+  When I launch a "curl" attack with:
+    """
+    pwd
+    """
+  Then the output should contain:
+    """
+    TODD
     """
