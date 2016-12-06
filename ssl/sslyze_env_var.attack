@@ -1,5 +1,5 @@
 @reallyslow
-@perf
+
 Feature: Run sslyze against a target
 
 Background:
@@ -8,7 +8,7 @@ Background:
     | name     | environment_variable_name |
     | hostname | HOSTNAME |
 
-
+@perf
 Scenario: Ensure rejected SSLv2 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -18,6 +18,7 @@ Scenario: Ensure rejected SSLv2 Cipher Suites
     """
     Server rejected all cipher suites
     """
+@perf
 Scenario: Ensure accepted SSLv3 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -55,7 +56,7 @@ Scenario: Ensure accepted SSLv3 Cipher Suites
     """
     TLS_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
-
+@perf
 Scenario: Ensure accepted TLSv1 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -93,6 +94,7 @@ Scenario: Ensure accepted TLSv1 Cipher Suites
     """
     TLS_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
+@perf
 Scenario: Ensure accepted TLSv1_1 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -130,7 +132,7 @@ Scenario: Ensure accepted TLSv1_1 Cipher Suites
     """
     TLS_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
-
+@perf
 Scenario: Ensure accepted TLSv1_2 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -180,7 +182,7 @@ Scenario: Ensure accepted TLSv1_2 Cipher Suites
     """
     TLS_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
-
+@perf
 Scenario: Ensure SSL Certificate is Trusted
   When I launch an "sslyze" attack with:
     """
