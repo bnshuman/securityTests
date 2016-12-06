@@ -1,2 +1,2 @@
 #! /bin/bash
-/opt/gauntlt/bin/gauntlt -f progress -t @perf
+/opt/gauntlt/bin/gauntlt -t @perf
