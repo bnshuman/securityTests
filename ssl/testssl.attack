@@ -9,7 +9,7 @@ Background:
 
 @quote
 Scenario: Check for SSL vulnerabilities
-  When I launch a "generic" attack with:
+  When I launch a "curl" attack with:
     """
     /opt/securityTests/ssl/ssl-vulns.sh <hostname>
     """
@@ -20,7 +20,7 @@ Scenario: Check for SSL vulnerabilities
 
 @perf @prod 
 Scenario: Check for SSL vulnerabilities
-  When I launch a "generic" attack with:
+  When I launch a "curl" attack with:
     """
     /opt/securityTests/ssl/ssl-vulns.sh <hostname>
     """
@@ -31,7 +31,7 @@ Scenario: Check for SSL vulnerabilities
 
 @perf @prod @quote
 Scenario: Check for soon to expire ssl certs 
-  When I launch a "generic" attack with:
+  When I launch a "curl" attack with:
     """
     /opt/securityTests/ssl/ssl-cert.sh <hostname>
     """
