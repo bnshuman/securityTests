@@ -112,7 +112,6 @@ Scenario: Ensure accepted TLSv1_1 Cipher Suites
     """
     TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
-
 @quote
 Scenario: Ensure accepted TLSv1_2 Cipher Suites
   When I launch an "sslyze" attack with:
@@ -187,7 +186,6 @@ Scenario: Ensure accepted TLSv1_2 Cipher Suites
     """
     TLS_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
-
 @quote
 Scenario: Ensure SSL Certificate is Trusted
   When I launch an "sslyze" attack with:
@@ -196,7 +194,7 @@ Scenario: Ensure SSL Certificate is Trusted
     """
   Then the output should match:
     """
-    Certificate is trusted
+    NOT Trusted
     """
 @quote
 Scenario: Ensure Hostname Validation
