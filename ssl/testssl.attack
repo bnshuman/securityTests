@@ -44,7 +44,7 @@ Scenario: Check for soon to expire ssl certs
 Scenario: Check for soon to expire ssl certs 
   When I launch a "curl" attack with:
     """
-    pwd;ls
+    ls -l
     """
   Then the output should contain:
     """
