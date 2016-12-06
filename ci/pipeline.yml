@@ -66,13 +66,13 @@ jobs:
         file: git-securitytests-repo/ci/prod.yml
         params:
           HOSTNAME: csaa-insurance.aaa.com  
-      - task: run-tests-quote
-        inputs:
-        - name: git-securitytests-repo
-        image: securitytests-image
-        file: git-securitytests-repo/ci/quote.yml
-        params:
-          HOSTNAME: quote.ds-csaa.io           
+   #   - task: run-tests-quote
+   #     inputs:
+   #     - name: git-securitytests-repo
+   #     image: securitytests-image
+   #     file: git-securitytests-repo/ci/quote.yml
+   #     params:
+   #       HOSTNAME: quote.digital.pncie.com           
   - name: run-security-checks
     plan:
     - aggregate:
