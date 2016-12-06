@@ -2,7 +2,7 @@
 Feature: Run testssl against a target
 
 Background:
-  Given "ping" is installed
+  Given the "ping" command line binary is installed
   And the following environment variables:
     | name     | environment_variable_name |
     | hostname | HOSTNAME |
