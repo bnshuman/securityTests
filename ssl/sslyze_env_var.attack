@@ -192,6 +192,7 @@ Scenario: Ensure SSL Certificate is Trusted
     """
     Certificate is trusted
     """
+@perf
 Scenario: Ensure Hostname Validation
   When I launch an "sslyze" attack with:
     """
