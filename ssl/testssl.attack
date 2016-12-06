@@ -39,14 +39,3 @@ Scenario: Check for soon to expire ssl certs
     """
     0\n
     """
-    
-    @perf @prod @quote
-Scenario: Check for soon to expire ssl certs 
-  When I launch a "curl" attack with:
-    """
-    env
-    """
-  Then the output should contain:
-    """
-    TODD602
-    """
