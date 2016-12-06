@@ -5,4 +5,4 @@ inputs:
 run:
   dir: git-securitytests-repo
   path: /opt/gauntlt/bin/gauntlt
-  args: [-t perf]
+  args: [-t @perf]
