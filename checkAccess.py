@@ -7,7 +7,8 @@ server = sys.argv[1]
 numberOfTries = 1
 
 name = os.getenv("URLS")
-fileName = $(pwd) + "/data/" + name
+path = os.getenv("PWD")
+fileName = path + "/data/" + name
 
 with open(fileName) as data_file:
      for line_terminated in data_file:
