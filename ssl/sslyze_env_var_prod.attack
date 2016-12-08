@@ -8,7 +8,7 @@ Background:
     | name     | environment_variable_name |
     | hostname | HOSTNAME |
 
-@perf
+@prod
 Scenario: Ensure rejected SSLv2 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -18,7 +18,7 @@ Scenario: Ensure rejected SSLv2 Cipher Suites
     """
     Server rejected all cipher suites
     """
-@perf
+@prod
 Scenario: Ensure accepted SSLv3 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -26,26 +26,6 @@ Scenario: Ensure accepted SSLv3 Cipher Suites
     """
   Then the output should match:
     """
-    TLS_RSA_WITH_AES_128_CBC_SHA.*128 bits
-    """
-  And the output should match:
-    """
-    TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA.*256 bits
-    """
-  And the output should match:
-    """
-    TLS_RSA_WITH_AES_256_CBC_SHA.*256 bits
-    """
-  And the output should match:
-    """
-    TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA.*128 bits
-    """
-  And the output should match:
-    """
-    TLS_RSA_WITH_AES_128_CBC_SHA.*128 bits
-    """
-  And the output should match:
-    """
     TLS_RSA_WITH_RC4_128_SHA.*128 bits
     """
   And the output should match:
@@ -54,9 +34,13 @@ Scenario: Ensure accepted SSLv3 Cipher Suites
     """
   And the output should match:
     """
+    TLS_RSA_WITH_RC4_128_SHA.*128 bits
+    """
+  And the output should match:
+    """
     TLS_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
-@perf
+@prod
 Scenario: Ensure accepted TLSv1 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -64,11 +48,15 @@ Scenario: Ensure accepted TLSv1 Cipher Suites
     """
   Then the output should match:
     """
-    TLS_RSA_WITH_AES_128_CBC_SHA.*128 bits
+    TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA.*256 bits
     """
   And the output should match:
     """
     TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA.*256 bits
+    """
+  And the output should match:
+    """
+    TLS_DHE_RSA_WITH_AES_256_CBC_SHA.*256 bits
     """
   And the output should match:
     """
@@ -84,17 +72,17 @@ Scenario: Ensure accepted TLSv1 Cipher Suites
     """
   And the output should match:
     """
-    TLS_RSA_WITH_RC4_128_SHA.*128 bits
+    TLS_RSA_WITH_RC4_128_MD5.*128 bits
     """
   And the output should match:
     """
-    TLS_RSA_WITH_RC4_128_MD5.*128 bits
+    TLS_RSA_WITH_RC4_128_SHA.*128 bits
     """
   And the output should match:
     """
     TLS_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
-@perf
+@prod
 Scenario: Ensure accepted TLSv1_1 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -102,11 +90,15 @@ Scenario: Ensure accepted TLSv1_1 Cipher Suites
     """
   Then the output should match:
     """
-    TLS_RSA_WITH_AES_128_CBC_SHA.*128 bits
+    TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA.*256 bits
     """
   And the output should match:
     """
     TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA.*256 bits
+    """
+  And the output should match:
+    """
+    TLS_DHE_RSA_WITH_AES_256_CBC_SHA.*256 bits
     """
   And the output should match:
     """
@@ -122,17 +114,18 @@ Scenario: Ensure accepted TLSv1_1 Cipher Suites
     """
   And the output should match:
     """
-    TLS_RSA_WITH_RC4_128_SHA.*128 bits
+    TLS_RSA_WITH_RC4_128_MD5.*128 bits
     """
   And the output should match:
     """
-    TLS_RSA_WITH_RC4_128_MD5.*128 bits
+    TLS_RSA_WITH_RC4_128_SHA.*128 bits
     """
   And the output should match:
     """
     TLS_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
-@perf
+
+@prod
 Scenario: Ensure accepted TLSv1_2 Cipher Suites
   When I launch an "sslyze" attack with:
     """
@@ -140,7 +133,11 @@ Scenario: Ensure accepted TLSv1_2 Cipher Suites
     """
   Then the output should match:
     """
-    TLS_RSA_WITH_AES_128_GCM_SHA256.*128 bits
+    TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384.*256 bits
+    """
+  And the output should match:
+    """
+    TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384.*256 bits
     """
   And the output should match:
     """
@@ -148,19 +145,39 @@ Scenario: Ensure accepted TLSv1_2 Cipher Suites
     """
   And the output should match:
     """
+    TLS_DHE_RSA_WITH_AES_256_GCM_SHA384.*256 bits
+    """
+  And the output should match:
+    """
+    TLS_DHE_RSA_WITH_AES_256_CBC_SHA.*256 bits
+    """
+  And the output should match:
+    """
+    TLS_RSA_WITH_AES_256_CBC_SHA256.*256 bits
+    """
+  And the output should match:
+    """
+    TLS_RSA_WITH_AES_256_GCM_SHA384.*256 bits
+    """
+  And the output should match:
+    """
     TLS_RSA_WITH_AES_256_CBC_SHA.*256 bits
     """
   And the output should match:
     """
-    TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256.*128 bits
-    """
-  And the output should match:
-    """
-    TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256.*128 bits
+    TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256.*128 bits
     """
   And the output should match:
     """
     TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA.*128 bits
+    """
+  And the output should match:
+    """
+    TLS_DHE_RSA_WITH_AES_128_GCM_SHA256.*128 bits
+    """
+  And the output should match:
+    """
+    TLS_DHE_RSA_WITH_AES_128_CBC_SHA.*128 bits
     """
   And the output should match:
     """
@@ -169,6 +186,10 @@ Scenario: Ensure accepted TLSv1_2 Cipher Suites
   And the output should match:
     """
     TLS_RSA_WITH_AES_128_CBC_SHA.*128 bits
+    """
+  And the output should match:
+    """
+    TLS_RSA_WITH_AES_128_CBC_SHA256.*128 bits
     """
   And the output should match:
     """
@@ -182,7 +203,8 @@ Scenario: Ensure accepted TLSv1_2 Cipher Suites
     """
     TLS_RSA_WITH_3DES_EDE_CBC_SHA.*112 bits
     """
-@perf
+
+@prod
 Scenario: Ensure SSL Certificate is Trusted
   When I launch an "sslyze" attack with:
     """
@@ -192,7 +214,7 @@ Scenario: Ensure SSL Certificate is Trusted
     """
     Certificate is trusted
     """
-@perf
+@prod
 Scenario: Ensure Hostname Validation
   When I launch an "sslyze" attack with:
     """
