@@ -4,4 +4,4 @@ inputs:
   - { name: securitytests-repo } 
 run:
   dir: securitytests-repo
-  path: ../bin/securityChecks.sh
+  path: ./bin/securityChecks.sh
