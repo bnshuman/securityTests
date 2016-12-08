@@ -3,10 +3,12 @@ import urllib2
 import sys
 import os
 
-name = os.getenv("URLS")
 server = sys.argv[1] 
+name = os.getenv("URLS")
+path = os.getenv("PWD")
+fileName = path + "/data/" + name
 
-with open(./data/name) as data_file:
+with open(fileName) as data_file:
      for line_terminated in data_file:
        line = line_terminated.rstrip('\n')
        for x in range(0,1):
