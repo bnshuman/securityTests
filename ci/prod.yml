@@ -4,4 +4,4 @@ inputs:
   - { name: git-securitytests-repo } 
 run:
   dir: git-securitytests-repo
-  path: ./prod.sh
+  path: ./bin/prod.sh
