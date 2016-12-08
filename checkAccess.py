@@ -7,9 +7,8 @@ server = sys.argv[1]
 numberOfTries = 1
 
 name = os.getenv("URLS")
-newFileName = name
 
-with open(newFileName) as data_file:
+with open(./data/name) as data_file:
      for line_terminated in data_file:
        line = line_terminated.rstrip('\n')
        for x in range(0,numberOfTries):
