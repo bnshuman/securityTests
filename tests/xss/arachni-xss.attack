@@ -1,6 +1,7 @@
 @reallyslow
 Feature: Look for cross site scripting (xss) using arachni against a URL
 
+@poc
 Scenario: Using the arachni, look for cross site scripting and verify no issues are found
   Given "arachni" is installed
   And the following environment variables:
