@@ -12,8 +12,21 @@ resources:
   - name: security-image
     type: docker-image
     source:
-      repository: tgbenson/gauntlt-image
+      repository: tgbenson/securitytests
       tag: latest
+
+  - name: slack-alert
+    type: slack-notification
+    source:
+      url: https://hooks.slack.com/services/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
+
+resource_types:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
+
 
 jobs:
   - name: run-security-tests
@@ -47,7 +60,6 @@ jobs:
         file: git-securitytests-repo/ci/perf.yml
         params:
           HOSTNAME: e3.pncie.com
-    - aggregate:
       - task: run-tests-prod
         inputs:
         - name: git-securitytests-repo
@@ -55,13 +67,23 @@ jobs:
         file: git-securitytests-repo/ci/prod.yml
         params:
           HOSTNAME: csaa-insurance.aaa.com  
-      #- task: run-tests-quote
-      #  inputs:
-      #  - name: git-securitytests-repo
-      #  image: securitytests-image
-      #  file: git-securitytests-repo/ci/quote.yml
-      #  params:
-      #    HOSTNAME: quote.digital.pncie.com           
+#      - task: run-tests-quote
+#        inputs:
+#        - name: git-securitytests-repo
+#        image: securitytests-image
+#        file: git-securitytests-repo/ci/quote.yml
+#        params:
+#          HOSTNAME: quote.digital.pncie.com           
+    on_failure:
+      put: slack-alert
+      params:
+        always_notify: true
+        icon_emoji: ":exclamation:"
+        channel: '#secops'
+        text: |
+          Security checks/tests failed
+          Details of execution:
+          http://concoursedev.tent.trt.csaa.pri/builds/$BUILD_ID
   - name: run-security-checks
     plan:
     - aggregate:
@@ -71,19 +93,19 @@ jobs:
         resource: git-securitytests-repo
         trigger: false
       - get: security-image
-    #- task: run-securitytests-quote
-    #  inputs:
-    #  - name: securitytests-repo
-    #  file: securitytests-repo/ci/check.yml
-    #  image: securitytests-image
-    #  params: 
-    #    DATADOG_APIKEY: 8a91bd828137db6e599e3932c20ef336
-    #    DATADOG_APPKEY: 249629b031233b4c14fd129cf74c03bebb77b8e8
-    #    URLS: quoteMasterURLList.txt
-    #    APP: quote
-    #    SERVER: quote.digital.pncie.com
-    #    ACCESS: quoteAccessControl.txt
-    #    UNENCRYPT: quoteUnencryptControl.txt
+#    - task: run-securitytests-quote
+#      inputs:
+#      - name: securitytests-repo
+#      file: securitytests-repo/ci/check.yml
+#      image: securitytests-image
+#      params: 
+#        DATADOG_APIKEY: 8a91bd828137db6e599e3932c20ef336
+#        DATADOG_APPKEY: 249629b031233b4c14fd129cf74c03bebb77b8e8
+#        URLS: quoteMasterURLList.txt
+#        APP: quote
+#        SERVER: quote.digital.pncie.com
+#        ACCESS: quoteAccessControl.txt
+#        UNENCRYPT: quoteUnencryptControl.txt
     - task: run-securitytests-prod
       inputs:
        - name: securitytests-repo
@@ -97,3 +119,13 @@ jobs:
         SERVER: csaa-insurance.aaa.com 
         ACCESS: csaaaccessControl.txt
         UNENCRYPT: csaaunencryptControl.txt
+    on_failure:
+      put: slack-alert
+      params:
+        always_notify: true
+        icon_emoji: ":exclamation:"
+        channel: '#secops'
+        text: |
+          Security checks failed
+          Details of execution:
+          http://concoursedev.tent.trt.csaa.pri/builds/$BUILD_ID
