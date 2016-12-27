@@ -43,35 +43,35 @@ jobs:
         inputs:
         - name: git-securitytests-repo
         image: security-image
-        file: git-securitytests-repo/ci/perf.yml
+        file: git-securitytests-repo/ci/tasks/perf.yml
         params:
           HOSTNAME: e1.pncie.com
       - task: run-tests-e2
         inputs:
         - name: git-securitytests-repo
         image: security-image
-        file: git-securitytests-repo/ci/perf.yml
+        file: git-securitytests-repo/ci/tasks/perf.yml
         params:
           HOSTNAME: e2.pncie.com  
       - task: run-tests-e3
         inputs:
         - name: git-securitytests-repo
         image: security-image
-        file: git-securitytests-repo/ci/perf.yml
+        file: git-securitytests-repo/ci/tasks/perf.yml
         params:
           HOSTNAME: e3.pncie.com
       - task: run-tests-prod
         inputs:
         - name: git-securitytests-repo
         image: security-image
-        file: git-securitytests-repo/ci/prod.yml
+        file: git-securitytests-repo/ci/tasks/prod.yml
         params:
           HOSTNAME: csaa-insurance.aaa.com  
 #      - task: run-tests-quote
 #        inputs:
 #        - name: git-securitytests-repo
 #        image: securitytests-image
-#        file: git-securitytests-repo/ci/quote.yml
+#        file: git-securitytests-repo/ci/tasks/quote.yml
 #        params:
 #          HOSTNAME: quote.digital.pncie.com           
     on_failure:
@@ -96,7 +96,7 @@ jobs:
 #    - task: run-securitytests-quote
 #      inputs:
 #      - name: securitytests-repo
-#      file: securitytests-repo/ci/check.yml
+#      file: securitytests-repo/ci/tasks/check.yml
 #      image: securitytests-image
 #      params: 
 #        DATADOG_APIKEY: 8a91bd828137db6e599e3932c20ef336
@@ -109,7 +109,7 @@ jobs:
     - task: run-securitytests-prod
       inputs:
        - name: securitytests-repo
-      file: securitytests-repo/ci/check.yml
+      file: securitytests-repo/ci/tasks/check.yml
       image: security-image 
       params: 
         DATADOG_APIKEY: 8a91bd828137db6e599e3932c20ef336
