@@ -34,6 +34,6 @@ echo "verbose=$verbose, server='$SERVER', Leftovers: $@"
 
 
 echo "Initializing baseline for access over port 80..."
-$PYPATH/python $WRKDIR/checkHTTPS.py $SERVER > $UNENCRYPT
+$PYPATH/python $WRKDIR/checkhttps.py $SERVER > $UNENCRYPT
 echo "Initializing baseline for unauthenticated access..."
-$PYPATH/python $WRKDIR/checkAccess.py $SERVER > $ACCESS
+$PYPATH/python $WRKDIR/checkaccess.py $SERVER > $ACCESS

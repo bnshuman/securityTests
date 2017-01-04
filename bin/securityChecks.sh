@@ -33,28 +33,28 @@ echo $ACCESS
 echo "----End"
 
 echo "Testing access over port 80..."
-$PYPATH/python ./checkHTTPS.py $SERVER > ./data/unencryptRun.txt
+$PYPATH/python ./checkhttps.py $SERVER > ./data/unencryptRun.txt
 if /usr/bin/diff ./data/unencryptRun.txt ./data/$UNENCRYPT > /dev/null
 then
    echo "Access over unencrypted channels (port 80) remains the same."
-   $PYPATH/python ./sendToDatadog.py 0 https 0 $APP
+   $PYPATH/python ./sendtodatadog.py 0 https 0 $APP
 else
    if [ "$verbose" == "0" ]
    then
      echo "Access over unencrypted channels (port 80) has changed. Run 'diff unencryptRun.txt unencryptControl.txt' to see details"
    else
      echo "Access to the following URL(s) over port 80 has changed. Please investigate and update the control file if necessary (unencryptControl.txt)."
-     /usr/bin/diff ./data/unencryptRun.txt ./data/$UNENCRYPT 
+     /usr/bin/diff ./data/unencryptRun.txt ./data/$UNENCRYPT
    fi
-   $PYPATH/python ./sendToDatadog.py 1 https 2 $APP
+   $PYPATH/python ./sendtodatadog.py 1 https 2 $APP
 fi
 
 echo "Testing unauthenticated access..."
-$PYPATH/python ./checkAccess.py $SERVER > ./data/accessRun.txt
+$PYPATH/python ./checkaccess.py $SERVER > ./data/accessRun.txt
 if /usr/bin/diff ./data/accessRun.txt ./data/$ACCESS > /dev/null
 then
    echo "Access to pages unauthenticated remains the same."
-   $PYPATH/python ./sendToDatadog.py 0 access 0 $APP
+   $PYPATH/python ./sendtodatadog.py 0 access 0 $APP
 else
    if [ "$verbose" == "0" ]
    then
@@ -62,6 +62,6 @@ else
    else
      echo "Access to the following URL(s) by an unauthenticated user has changed. Please investigate and update the control file if necessary (accessControl.txt)."
      /usr/bin/diff ./data/accessRun.txt ./data/$ACCESS
-   fi  
-   $PYPATH/python ./sendToDatadog.py 1 access 1 $APP
+   fi
+   $PYPATH/python ./sendtodatadog.py 1 access 1 $APP
 fi
