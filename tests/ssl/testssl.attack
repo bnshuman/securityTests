@@ -18,7 +18,7 @@ Scenario: Check for SSL vulnerabilities
     6\n
     """
 
-@perf @prod 
+@perf @prod
 Scenario: Check for SSL vulnerabilities
   When I launch a "curl" attack with:
     """
@@ -29,8 +29,8 @@ Scenario: Check for SSL vulnerabilities
     5\n
     """
 
-@perf @prod @quote
-Scenario: Check for soon to expire ssl certs 
+@prod @quote
+Scenario: Check for soon to expire ssl certs
   When I launch a "curl" attack with:
     """
     ../../tests/ssl/ssl-cert.sh <hostname>
