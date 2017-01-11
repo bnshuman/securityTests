@@ -18,7 +18,7 @@ Scenario: Check for SSL vulnerabilities
     6\n
     """
 
-@perf @prod
+@perf
 Scenario: Check for SSL vulnerabilities
   When I launch a "curl" attack with:
     """
@@ -27,6 +27,17 @@ Scenario: Check for SSL vulnerabilities
   Then the output should contain:
     """
     4\n
+    """
+    
+@prod
+Scenario: Check for SSL vulnerabilities
+  When I launch a "curl" attack with:
+    """
+    ../../tests/ssl/ssl-vulns.sh <hostname>
+    """
+  Then the output should contain:
+    """
+    5\n
     """
 
 @prod @quote
